@@ -1,8 +1,9 @@
 import React from "react";
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import css from './Contacts.module.css';
 import { useSelector } from "react-redux";
 import {getContacts, getFilter} from 'redux/selectors';
+
 
 const filteredContacts = (contacts, filter) => {
   return contacts.filter(contact =>
@@ -17,11 +18,11 @@ const filterOfContacts = filteredContacts(contacts, filter)
 
     return (
         <ul className={css.list}>
-        {filterOfContacts.map(({id, name, number}) => (
+        {filterOfContacts.map(({id, name, phone}) => (
           <li
           className={css.contactItem}
           key={id}>
-            <p className={css.nameContact}>{name}: {number}</p>
+            <p className={css.nameContact}>{name}: {phone}</p>
             <button  className={css.buttonDelete} type="button" onClick={() => onDelete(id)}>Delete</button>
           </li>
         ))}
@@ -33,13 +34,6 @@ const filterOfContacts = filteredContacts(contacts, filter)
 
 export default Contacts;
 
-// Contacts.propTypes = {
-//     contacts: PropTypes.arrayOf(
-//       PropTypes.shape({
-//         id: PropTypes.string.isRequired,
-//         name: PropTypes.string.isRequired,
-//         number: PropTypes.string.isRequired,
-//       }).isRequired
-//     ).isRequired,
-//     filter: PropTypes.string.isRequired,
-//   };
+Contacts.propTypes = {
+      onDelete: PropTypes.func.isRequired,
+  };
